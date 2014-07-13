@@ -14,9 +14,9 @@ describe('Close IO', function () {
   describe('.enabled()', function () {
     var Track = facade.Track;
     it('should only be enabled for server side messages', function () {
-      keen.enabled(new Track({ channel : 'server' })).should.be.ok;
-      keen.enabled(new Track({ channel : 'client' })).should.not.be.ok;
-      keen.enabled(new Track({})).should.not.be.ok;
+      close.enabled(new Track({ channel : 'server' })).should.be.ok;
+      close.enabled(new Track({ channel : 'client' })).should.not.be.ok;
+      close.enabled(new Track({})).should.not.be.ok;
     });
   });
 });

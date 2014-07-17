@@ -76,7 +76,7 @@ describe('Close.io', function () {
     it('will error on an invalid set of keys', function (done) {
       var track = helpers.track();
       close.track(track, { apiKey: 'x'}, function (err) {
-        console.log("ERROR: ", err);
+        console.log("ERROR ARGUMENTS: ", arguments);
         should.exist(err);
         err.status.should.eql(401);
         done();

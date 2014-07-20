@@ -61,8 +61,23 @@ describe('Close.io', function () {
   });
 
   describe('.identify()', function () {
+    var identify = helpers.identify()
+      , filter   = { email : identify.email() };
+
     it('should get a good response from the API', function (done) {
-      var identify = helpers.identify();
+      close.identify(identify, settings, done);
+    });
+
+    it('should be able to identify a new user', function (done) {
+      close.identify(identify, settings, function(err, res){
+        if (err) return done(err);
+        res.body.item.emails[0].value.should.eql(identify.email());
+        done();
+      });
+    });
+
+    it('should be able to identify an existing user', function (done) {
+      var identify = helpers.identify({ email: 'calvin@segment.io' });
       close.identify(identify, settings, done);
     });
   });

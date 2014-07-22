@@ -59,7 +59,7 @@ describe('Close.io', function () {
       should.not.exist(close.validate({}, { apiKey : 'xxx' }));
     });
   });
-
+  //TODO: write test that checks for dublicate contact entries
   describe('.identify()', function () {
     var identify = helpers.identify()
       , filter   = { email : identify.email() };
@@ -71,7 +71,7 @@ describe('Close.io', function () {
     it('should be able to identify a new user', function (done) {
       close.identify(identify, settings, function(err, res){
         if (err) return done(err);
-        res.body.item.emails[0].value.should.eql(identify.email());
+        res.emails[0].email.should.eql(identify.email());
         done();
       });
     });

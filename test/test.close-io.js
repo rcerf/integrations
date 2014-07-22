@@ -77,7 +77,7 @@ describe('Close.io', function () {
     });
 
     it('should be able to identify an existing user', function (done) {
-      var identify = helpers.identify({ email: 'calvin@segment.io' });
+      var identify = helpers.identify({ email: 'jakecerf@gmail.com' });
       close.identify(identify, settings, done);
     });
   });

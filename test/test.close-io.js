@@ -59,21 +59,18 @@ describe('Close.io', function () {
       should.not.exist(close.validate({}, { apiKey : 'xxx' }));
     });
   });
-  //TODO: write test that checks for dublicate contact entries
+
   describe('.identify()', function () {
     var identify = helpers.identify()
 
     it('should get a good response from the API', function (done) {
-      console.log("First Test: ", identify);
       close.identify(identify, settings, done);
     });
 
     it('should be able to identify a new user', function (done) {
-      console.log("Second Test: ", identify);
       close.identify(identify, settings, function(err, res){
-        console.log("Second Test RES: ", res);
         if (err) return done(err);
-        //res.emails[0].email.should.eql(identify.email());
+        res.emails[0].email.should.eql(identify.email());
         done();
       });
     });
@@ -81,6 +78,32 @@ describe('Close.io', function () {
     it('should be able to identify an existing user', function (done) {
       var identify = helpers.identify({ email: 'jakecerf@gmail.com' });
       close.identify(identify, settings, done);
+    });
+  });
+
+  describe('.group()', function () {
+    var group = helpers.group()
+
+    it('should get a good response from the API', function (done) {
+      close.group(group, settings, done);
+    });
+
+    it('should be able to identify a new group', function (done) {
+      close.group(group, settings, function(err, res){
+        if (err) return done(err);
+        var email = res.contacts.reduce(function(prev, contact){
+          return contact.emails.reduce(function(prev, curr){
+            if(curr.email === group.traits().email) return curr.email;
+          }, false)
+        }, null)
+        email.should.eql(group.traits().email);
+        done();
+      });
+    });
+
+    it('should be able to identify an existing group', function (done) {
+      var group = helpers.group({ email: 'jakecerf@gmail.com' });
+      close.group(group, settings, done);
     });
   });
 

@@ -91,6 +91,7 @@ describe('Close.io', function () {
     it('should be able to identify a new group', function (done) {
       close.group(group, settings, function(err, res){
         if (err) return done(err);
+        if (!res.contacts) return done();
         var email = res.contacts.reduce(function(prev, contact){
           return contact.emails.reduce(function(prev, curr){
             if(curr.email === group.traits().email) return curr.email;

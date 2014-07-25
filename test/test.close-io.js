@@ -10,48 +10,6 @@ var close    = new integrations['Close.io']()
 
 describe('Close.io', function () {
 
-  describe('.enabled()', function () {
-    var Track = facade.Track;
-    it('should require a userId', function () {
-      close.enabled(new Track({
-        channel : 'server'
-      })).should.not.be.ok;
-
-      close.enabled(new Track({
-        userId: 'test@segment.io',
-        channel: 'server'
-      })).should.be.ok;
-    });
-
-    it('should only be enabled for all messages with email', function () {
-      close.enabled(new Track({
-        userId: 'test@segment.io',
-        channel: 'server'
-      })).should.be.ok;
-
-      close.enabled(new Track({
-        userId: 'sss',
-        channel: 'server'
-      })).should.not.be.ok;
-    });
-
-    it('should only be enabled for server side messages', function () {
-      close.enabled(new Track({
-        userId: 'test@segment.io',
-        channel: 'server'
-      })).should.be.ok;
-
-      close.enabled(new Track({
-        userId: 'test@segment.io',
-        channel: 'client'
-      })).should.not.be.ok;
-
-      close.enabled(new Track({
-        userId: 'test@segment.io'
-      })).should.not.be.ok;
-    });
-  });
-
   describe('.validate()', function () {
     it('should require an apiKey', function () {
       close.validate({}, { apiKey : '' }).should.be.an.instanceOf(Error);

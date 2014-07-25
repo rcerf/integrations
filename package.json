@@ -17,6 +17,7 @@
     "date-math": "0.0.1",
     "extend": "~1.1.3",
     "is": "~0.2.6",
+    "isemail": "^1.0.1",
     "isodate-traverse": "~0.3.0",
     "isostring": "0.0.1",
     "lru-cache": "~2.3.0",
@@ -40,4 +41,3 @@
     "segmentio-integration-tester": "*"
   }
 }
-
